@@ -56,8 +56,12 @@ const BST = require('./bst');
 function main() {
   let numArr = [3, 1, 4, 6, 9, 2, 5, 7];
   let result = insertNumBst(numArr);
-  // tree(result);
+  // tree(result);  
   console.log(height(result));
+
+  let fakeTree ={key: 3, left:{key: 5}};
+  console.log(bstChecker(result));
+  bstChecker(fakeTree)
 
   let letterArr = ['E', 'A', 'S', 'Y', 'Q', 'U', 'E', 'S', 'T', 'I', 'O', 'N'];
   insertLettersBst(letterArr);
@@ -69,7 +73,7 @@ function insertNumBst(arr) {
     numBst.insert(arr[i], arr[i]);
   }
 
-  // console.log(numBst)
+  // console.log(numBst)  
   return numBst;
 }
 function insertLettersBst(arr) {
@@ -115,6 +119,28 @@ function height(t) {
   }
 
   return 1;
+
+}
+
+//Q6
+
+function bstChecker(t, x, y) {
+  if(t.key > x || t.key < y){
+    return false;
+  }
+
+  if(t.left){
+    if(!bstChecker(t.left, t.key, y)){
+      return false;
+    }
+  }
+  if(t.left){
+    if(!bstChecker(t.right, x, t.key)){
+      return false;
+    }
+  }
+
+  return false;
 
 }
 
